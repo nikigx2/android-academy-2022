@@ -3,16 +3,14 @@ package com.strv.movies.ui.moviedetail
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.annotation.NonNull
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -39,9 +37,9 @@ fun MovieDetail(movie: MovieDetail) {
             progressSeconds = mutableStateOf(0f)
         )
 
-        Row {
+        Row() {
+            MovieInfo(movie = movie, modifier = Modifier.weight(1f))
             MoviePoster(movie = movie)
-            MovieInfo(movie = movie)
         }
     }
 }
@@ -87,23 +85,29 @@ fun MoviePoster(movie: MovieDetail) {
         contentDescription = stringResource(id = R.string.movie_image),
         modifier = Modifier
             .padding(top = 16.dp)
-            .size(120.dp)
+            .size(120.dp),
     )
 }
 
 @Composable
-fun MovieInfo(movie: MovieDetail) {
-    Column {
+fun MovieInfo(movie: MovieDetail, modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
         Text(
             movie.title,
-            modifier = Modifier.padding(top = 16.dp, end = 16.dp),
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp
+            fontSize = 20.sp,
+            modifier = Modifier.padding(top = 16.dp, start = 16.dp),
+            color = Color.Green,
+            fontWeight = FontWeight.Bold
         )
-        Text(movie.releaseDate, modifier = Modifier.padding(top = 8.dp))
+        Text(
+            movie.releaseDate,
+            modifier = Modifier.padding(top = 8.dp, start = 16.dp),
+            color = Color.Green
+        )
         Text(
             movie.overview,
-            modifier = Modifier.padding(top = 8.dp, end = 16.dp),
+            modifier = Modifier.padding(top = 8.dp, start = 16.dp),
+            color = Color.Green,
             textAlign = TextAlign.Justify
         )
     }
